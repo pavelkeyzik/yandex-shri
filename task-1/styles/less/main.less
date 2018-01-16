@@ -1,8 +1,28 @@
+/*
+    NAVIGATION
+    (1) - Header
+    (2) - Expectation
+*/
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
 }
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+p {
+    font-size: 16px;
+}
+
+/* -> (1) Header start */
 
 .header {
     background: #082841;
@@ -41,4 +61,55 @@ body {
 
 }
 
+/* <- Header end*/
 
+main {
+    display: flex;
+    flex-direction: column;
+    width: 944px;
+    margin: 0 auto;
+}
+
+section {
+    padding: 80px 0;
+}
+
+/* -> (2) Expectation start */
+
+.expectations {
+    
+    &__grid {
+        display: grid;
+        grid-template-areas: 
+            "first first first second"
+            "third fourth fourth fourth";
+        grid-gap: 15px;
+    }
+
+    article {
+        background: linear-gradient(#E6F0F0, #E9F0E6);
+        padding: 25px 32px 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__first {
+        grid-area: first;
+    }
+
+    &__second {
+        grid-area: second;
+    }
+
+    &__third {
+        grid-area: third;
+    }
+
+    &__fourth {
+        grid-area: fourth;
+    }
+
+}
+
+/* <- Expectation end */
