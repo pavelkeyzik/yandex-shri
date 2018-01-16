@@ -1,0 +1,24 @@
+{
+  "name": "task-1",
+  "version": "0.0.1",
+  "description": "Portfolio tash for Yandes-SHRI",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "browser-sync": "^2.23.5",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-less": "^3.4.0",
+    "gulp-sourcemaps": "^2.6.3",
+    "less-plugin-autoprefix": "^1.5.1"
+  },
+  "devDependencies": {
+    "gulp-livereload": "^3.8.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp",
+    "server": "gulp serve"
+  },
+  "author": "Pavel Keyzik",
+  "license": "MIT"
+}

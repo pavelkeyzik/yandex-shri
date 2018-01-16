@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+.header {
+  background: #082841;
+  display: -ms-flexbox;
+  display: flex;
+  height: 672px;
+}
+.header__avatar {
+  width: 552px;
+  object-fit: cover;
+  height: 100%;
+}
+.header__info {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  margin: 100px 40px 80px 80px;
+}
+.header__author {
+  color: white;
+}
+.header__author_profession {
+  font-size: 24px;
+}
+.header__author_name {
+  font-size: 40px;
+}
+.header__text {
+  color: white;
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=maps/main.css.map */
