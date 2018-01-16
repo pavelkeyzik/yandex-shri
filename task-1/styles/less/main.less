@@ -2,12 +2,24 @@
     NAVIGATION
     (1) - Header
     (2) - Expectation
+    (3) - Works
 */
+
+@primary: #dd3e18;
+@secondary: #082841;
+
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
+}
+
+img {
+    vertical-align: middle;
 }
 
 h1 {
@@ -25,7 +37,7 @@ p {
 /* -> (1) Header start */
 
 .header {
-    background: #082841;
+    background: @secondary;
     display: flex;
     height: 672px;
     
@@ -71,7 +83,7 @@ main {
 }
 
 section {
-    padding: 80px 0;
+    padding: 40px 0;
 }
 
 /* -> (2) Expectation start */
@@ -113,3 +125,49 @@ section {
 }
 
 /* <- Expectation end */
+
+/* -> (3) Works start */
+
+.works {
+
+}
+
+.work {
+    display: flex;
+    margin-bottom: 120px;
+
+    p {
+        margin: 0;
+    }
+
+    &:nth-child(2n + 1) {
+        flex-direction: row-reverse;
+
+        .work__slider {
+            margin: 0 0 0 80px;
+        }
+    }
+
+    &__slider {
+        box-shadow: 0 10px 25px #ddd;
+        margin-right: 80px;
+        border-radius: 4px;
+        display: flex;
+        width: 544px;
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        a {
+            color: @primary;
+            text-decoration: none;
+        }
+    }
+}
+
+/* <- Works end */

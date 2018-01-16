@@ -2,11 +2,18 @@
     NAVIGATION
     (1) - Header
     (2) - Expectation
+    (3) - Works
 */
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
+}
+img {
+  vertical-align: middle;
 }
 h1 {
   font-size: 40px;
@@ -61,7 +68,7 @@ main {
   margin: 0 auto;
 }
 section {
-  padding: 80px 0;
+  padding: 40px 0;
 }
 /* -> (2) Expectation start */
 .expectations__grid {
@@ -93,5 +100,45 @@ section {
   grid-area: fourth;
 }
 /* <- Expectation end */
+/* -> (3) Works start */
+.work {
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 120px;
+}
+.work p {
+  margin: 0;
+}
+.work:nth-child(2n + 1) {
+  -ms-flex-direction: row-reverse;
+      flex-direction: row-reverse;
+}
+.work:nth-child(2n + 1) .work__slider {
+  margin: 0 0 0 80px;
+}
+.work__slider {
+  box-shadow: 0 10px 25px #ddd;
+  margin-right: 80px;
+  border-radius: 4px;
+  display: -ms-flexbox;
+  display: flex;
+  width: 544px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  overflow: hidden;
+}
+.work__info {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+}
+.work__info a {
+  color: #dd3e18;
+  text-decoration: none;
+}
+/* <- Works end */
 
 /*# sourceMappingURL=maps/main.css.map */
