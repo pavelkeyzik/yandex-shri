@@ -1,8 +1,23 @@
+/*
+    NAVIGATION
+    (1) - Header
+    (2) - Expectation
+*/
 body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
 }
+h1 {
+  font-size: 40px;
+}
+h2 {
+  font-size: 24px;
+}
+p {
+  font-size: 16px;
+}
+/* -> (1) Header start */
 .header {
   background: #082841;
   display: -ms-flexbox;
@@ -36,5 +51,47 @@ body {
   color: white;
   font-size: 20px;
 }
+/* <- Header end*/
+main {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  width: 944px;
+  margin: 0 auto;
+}
+section {
+  padding: 80px 0;
+}
+/* -> (2) Expectation start */
+.expectations__grid {
+  display: -ms-grid;
+  display: grid;
+  grid-template-areas: "first first first second" "third fourth fourth fourth";
+  grid-gap: 15px;
+}
+.expectations article {
+  background: linear-gradient(#E6F0F0, #E9F0E6);
+  padding: 25px 32px 18px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+}
+.expectations__first {
+  grid-area: first;
+}
+.expectations__second {
+  grid-area: second;
+}
+.expectations__third {
+  grid-area: third;
+}
+.expectations__fourth {
+  grid-area: fourth;
+}
+/* <- Expectation end */
 
 /*# sourceMappingURL=maps/main.css.map */
