@@ -3,10 +3,14 @@
     (1) - Header
     (2) - Expectation
     (3) - Works
+    (4) - Slider
+    (5) - Footer
 */
 
 @primary: #dd3e18;
 @secondary: #082841;
+@blue-gradient: linear-gradient(#e6f0f0, #e9f0e6);
+@full-width: 944px;
 
 * {
     box-sizing: border-box;
@@ -34,6 +38,18 @@ p {
     font-size: 16px;
 }
 
+#svg-attach {
+    height: 20px;
+
+    .st0{
+        fill: #da2300;
+    }
+    
+    .st1{
+        fill: #971e00;
+    }
+}
+
 /* -> (1) Header start */
 
 .header {
@@ -55,7 +71,7 @@ p {
     }
 
     &__author {
-        color: white;
+        color: #fff;
 
         &_profession {
             font-size: 24px;
@@ -67,7 +83,7 @@ p {
     }
 
     &__text {
-        color: white;
+        color: #fff;
         font-size: 20px;
     }
 
@@ -78,7 +94,7 @@ p {
 main {
     display: flex;
     flex-direction: column;
-    width: 944px;
+    width: @full-width;
     margin: 0 auto;
 }
 
@@ -99,7 +115,7 @@ section {
     }
 
     article {
-        background: linear-gradient(#E6F0F0, #E9F0E6);
+        background: @blue-gradient;
         padding: 25px 32px 18px;
         display: flex;
         flex-direction: column;
@@ -171,3 +187,145 @@ section {
 }
 
 /* <- Works end */
+
+/* -> (4) Slider start */
+
+/* <- Slider end*/
+
+/* -> (5) Footer start */
+
+.footer-bg {
+    background: @blue-gradient;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    width: @full-width;
+    margin: 0 auto;
+    padding: 20px 0 70px;
+
+    &__content {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__about {
+        width: 300px;
+    }
+
+    &__links {
+        display: flex;
+        flex-direction: column;
+        
+        a {
+            color: @primary;
+            text-decoration: none;
+            display: flex;
+            margin-bottom: 10px;
+
+            &::before {
+                content: '';
+                width: 20px;
+                height: 20px;
+                background: rgba(0, 0, 0, .1);
+                border-radius: 2px;
+                margin-right: 10px;
+            }
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+
+        input,
+        textarea {
+            border: none;
+            background: #fff;
+            border-radius: 4px;
+            font: unset;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: 2px solid transparent;
+            transition: .2s;
+
+            &:focus {
+                border: 2px solid rgba(0, 0, 0, .1);
+            }
+
+            &:invalid {
+                box-shadow: none;
+            }
+
+            &:focus:invalid {
+                border: 2px solid #ff4d4d;
+            }
+
+            &:valid {
+                border: 2px solid rgba(85, 174, 0, .4);
+            }
+
+        }
+
+        input {
+            padding: 0 15px;
+            margin-bottom: 24px;
+            height: 48px;
+        }
+
+        textarea {
+            resize: none;
+            padding: 10px 15px;
+        }
+
+        &_attach {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px 0;
+            color: @primary;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 2px solid transparent;
+            transition: .2s;
+
+            &:focus {
+                border: 2px solid @primary;
+                background: fadeout(@primary, 90%);
+                padding: 10px;
+                outline: none;
+            }
+
+            svg {
+                margin-right: 5px;
+            }
+        }
+
+        &_submit {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            border: none;
+            border-radius: 4px;
+            background: @primary;
+            font-weight: bold;
+            color: #fff;
+            transition: .2s;
+            cursor: pointer;
+            border: 2px solid transparent;
+
+            &:focus,
+            &:hover {
+                border: 2px solid darken(@primary, 45%);
+                background: lighten(@primary, 5%);
+            }
+        }
+    }
+}
+
+/* <- Footer end*/

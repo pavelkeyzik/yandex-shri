@@ -81,5 +81,36 @@
             </article>
         </section>
     </main>
+    <footer class="footer-bg">
+        <div class="footer">
+            <h1>Контактная информация</h1>
+            <div class="footer__content">
+                <div class="footer__about">
+                    <p>Я открыт для новых проектов. Вы можете прислать мне для оценки примерное техническое задание или просто описание проекта своими словами.</p>
+                    <p>Ссылки на мои соцсети:</p>
+                    <nav class="footer__links">
+                        <a href="//vk.com/pavelkeyzik">ВКонтакте</a>
+                        <a href="//github.com/pavelkeyzik">GitHub</a>
+                        <a href="//www.linkedin.com/in/pavelkeyzik/">LinkedIn</a>
+                        <a href="//fb.com/pavelkeyzik">Facebook</a>
+                    </nav>
+                </div>
+                <form class="footer__form" method="get">
+                    <input name="userName" type="text" placeholder="Имя" required>
+                    <input name="email" type="email" placeholder="Почтовый ящик" required>
+                    <textarea name="text" cols="30" rows="10" placeholder="Сообщение" required></textarea>
+                    <label for="attachFile" tabindex="0" class="footer__form_attach">
+                        <svg id="svg-attach" viewBox="0 0 512 512">
+                                <polygon class="st0" points="330.7,6 87.9,6 87.9,506 449.2,506 449.2,122.8"/>
+                                <polygon class="st1" points="330.7,6 449.2,122.8 330.7,122.8"/>
+                        </svg>
+                        <span>Прикрепить ТЗ</span>
+                    </label>
+                    <input name="file" type="file" id="attachFile" hidden>
+                    <button type="submit" class="footer__form_submit">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
