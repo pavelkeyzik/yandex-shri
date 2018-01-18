@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Задание "Игра в города"</title>
-    <link rel="stylesheet" href="dist/styles.css">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <div class="outer"></div>
-
-    <script src="dist/bundle.js"></script>
+    <main>
+        <form>
+            <input list="js-cities" name="js-city">
+            <datalist id="js-cities">
+            </datalist>
+            <button>OK</button>
+        </form>
+    </main>
+    <footer>Copyright &copy; Павел Кейзик. Разработано для школы разработки интерфейсов "Яндекс".</footer>
+    <script src="js/app.js"></script>
 </body>
 </html>
