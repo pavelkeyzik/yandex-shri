@@ -86,7 +86,7 @@
 
     let cityList = document.getElementById('js-cities');
     
-    cities.forEach(item => {
+    cities.forEach((item) => {
         let node = document.createElement('option');
         node.value = item;
         cityList.appendChild(node);
