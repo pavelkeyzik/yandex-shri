@@ -26,7 +26,11 @@ gulp.task('serve', ['less'], function() {
     });
 
     gulp.watch('./styles/**/*.less', ['less']);
+<<<<<<< HEAD
     gulp.watch('*.html').on('change', browserSync.reload);
+=======
+    gulp.watch('*.html').on('change', browserSync.reload)
+>>>>>>> 28817ebcfa3edeb1fc60397dfa6d36ce6a7b186c
 
 });
 
