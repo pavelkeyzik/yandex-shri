@@ -5,18 +5,16 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "gulp",
+    "server": "gulp serve"
   },
   "author": "Pavel Keyzik",
   "license": "MIT",
-  "devDependencies": {
-    "extract-text-webpack-plugin": "^3.0.2",
-    "less": "^2.7.3",
-    "less-loader": "^4.0.5"
-  },
   "dependencies": {
-    "css-loader": "^0.28.9",
-    "style-loader": "^0.19.1",
-    "webpack": "^3.10.0"
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-less": "^3.4.0",
+    "gulp-sourcemaps": "^2.6.3",
+    "less-plugin-autoprefix": "^1.5.1"
   }
 }
