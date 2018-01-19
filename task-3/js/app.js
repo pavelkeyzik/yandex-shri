@@ -84,12 +84,57 @@
         'Ясный'
     ];
 
+    let computerSelectedCities = [];
+    let userSelectedCities = [];
+    let robotSelectedCities = [];
+
     let cityList = document.getElementById('js-cities');
     
-    cities.forEach((item) => {
-        let node = document.createElement('option');
-        node.value = item;
-        cityList.appendChild(node);
+    updateCities();
+
+    let form = document.getElementById('js-form');
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        let input = event.target['js-city'];
+        
+        if( cities.includes(input.value) ) {
+            userSelectedCities.push(input.value);
+            cities.splice(cities.indexOf(input.value), 1);
+            alert('Супер!');
+            robotInsert();
+        } else {
+            alert('Город не найден');
+        }
+
+        updateCities();
+        console.log(userSelectedCities);
+        console.log(robotSelectedCities);
+        input.value = '';
     });
 
+    function robotInsert() {
+        let lastWord = userSelectedCities[userSelectedCities.length - 1];
+        let symbol = lastWord.slice(-1).toLowerCase();
+
+        let newCity = cities.find((item) => {
+            if( item.toLowerCase().startsWith(symbol) ) {
+                cities.splice(cities.indexOf(item), 1);
+                robotSelectedCities.push(item);
+                return item;
+            }
+        });
+
+        if(!newCity) alert('Computer looser!');
+    }
+    
+    function updateCities() {
+        cityList.innerHTML = '';
+        cities.forEach((item) => {
+            let node = document.createElement('option');
+            node.value = item;
+            cityList.appendChild(node);
+        });
+    }
+    
 })();
