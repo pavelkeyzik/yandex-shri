@@ -76,11 +76,22 @@ var _citiesModel = __webpack_require__(2);
 
 var _citiesView = __webpack_require__(3);
 
+var _enterCityController = __webpack_require__(4);
+
+var _enterCityModel = __webpack_require__(5);
+
+var _enterCityView = __webpack_require__(6);
+
 var citiesView = new _citiesView.CitiesView();
 var citiesModel = new _citiesModel.CitiesModel();
 var cities = new _citiesController.CitiesController(citiesView, citiesModel);
 
+var enterCityModel = new _enterCityModel.EnterCityModel();
+var enterCityView = new _enterCityView.EnterCityView();
+var enterCity = new _enterCityController.EnterCityController(enterCityView, enterCityModel);
+
 cities.run();
+enterCity.run();
 
 /***/ }),
 /* 1 */
@@ -182,6 +193,120 @@ var CitiesView = exports.CitiesView = function () {
     }]);
 
     return CitiesView;
+}();
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var EnterCityController = exports.EnterCityController = function () {
+    function EnterCityController(view, model) {
+        _classCallCheck(this, EnterCityController);
+
+        this.view = view;
+        this.model = model;
+    }
+
+    _createClass(EnterCityController, [{
+        key: 'run',
+        value: function run() {
+            var cities = document.getElementById('enterCity');
+            cities.innerHTML = this.view.render();
+
+            this.addEvents();
+        }
+    }, {
+        key: 'addEvents',
+        value: function addEvents() {
+            var self = this;
+            self.cities = this.model.getCities().map(function (item) {
+                return item.toLowerCase();
+            });
+
+            var form = document.getElementById('enterCityForm');
+
+            form.addEventListener('submit', function () {
+                if (self.cities.includes(form.cityName.value.toLowerCase())) {
+                    console.log('Ok');
+                } else {
+                    console.log('City not found..');
+                }
+            });
+        }
+    }]);
+
+    return EnterCityController;
+}();
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var EnterCityModel = exports.EnterCityModel = function () {
+    function EnterCityModel() {
+        _classCallCheck(this, EnterCityModel);
+    }
+
+    _createClass(EnterCityModel, [{
+        key: 'getCities',
+        value: function getCities() {
+            return ['Анапа', 'Артём', 'Астрахань', 'Бакал', 'Белгород', 'Брянск', 'Великий Новгород', 'Владивосток', 'Волгоград', 'Горно-Алтайск', 'Гурьевск', 'Гусев', 'Дальнереченск', 'Данилов', 'Дзержинск', 'Екатеринбург', 'Елизово', 'Ершов', 'Железноводск', 'Жигулёвск', 'Жиздра', 'Заволжье', 'Заозёрск', 'Заречный', 'Иваново', 'Ижевск', 'Иркутск', 'Йошкар-Ола', 'Казань', 'Калининград', 'Калуга', 'Липецк', 'Липки', 'Лукоянов', 'Магадан', 'Магас', 'Майкоп', 'Находка', 'Нижневартовск', 'Нижний Новгород', 'Озёрск', 'Омск', 'Орёл', 'Пенза', 'Первоуральск', 'Пермь', 'Ростов-на-Дону', 'Ростов', 'Рязань', 'Санкт-Петербург', 'Саратов', 'Светлогорск', 'Тамбов', 'Тверь', 'Томск', 'Ульяновск', 'Урай', 'Уфа', 'Фролово', 'Фрязино', 'Фурманов', 'Хабаровск', 'Хадыженск', 'Ханты-Мансийск', 'Цивильск', 'Цимлянск', 'Чадан', 'Чапаевск', 'Чебоксары', 'Шадринск', 'Шали', 'Шарыпово', 'Электрогорск', 'Электросталь', 'Электроугли', 'Югорск', 'Южно-Сахалинск', 'Южноуральск', 'Якутск', 'Ярославль', 'Ясный'];
+        }
+    }]);
+
+    return EnterCityModel;
+}();
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var EnterCityView = exports.EnterCityView = function () {
+    function EnterCityView() {
+        _classCallCheck(this, EnterCityView);
+    }
+
+    _createClass(EnterCityView, [{
+        key: "render",
+        value: function render() {
+            return "\n            <form id=\"enterCityForm\">\n                <input name=\"cityName\" placeholder=\"Enter city\" id=\"enterCityInput\">\n                <button name=\"button\">OK</button>\n            </form>";
+        }
+    }]);
+
+    return EnterCityView;
 }();
 
 /***/ })
