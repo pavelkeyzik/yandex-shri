@@ -6,10 +6,12 @@ export class CitiesController {
     }
 
     run() {
-        let data = this.model.getCities();
-        let cities = document.getElementById('cities');
+        let self = this;
+        let citiesBlock = document.getElementById('cities');
 
-        cities.innerHTML = this.view.render(data);
+        this.model.getCities().subscribe(response => {
+            self.cities = response;
+            citiesBlock.innerHTML = self.view.render(self.cities);
+        });
     }
-
 }

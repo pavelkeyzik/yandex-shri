@@ -6,25 +6,31 @@ export class EnterCityController {
     }
 
     run() {
-        let cities = document.getElementById('enterCity');
-        cities.innerHTML = this.view.render();
-        
+        let citiesBlock = document.getElementById('enterCity');
+        citiesBlock.innerHTML = this.view.render();
+
         this.addEvents();
     }
 
     addEvents() {
         let self = this;
-        self.cities = this.model.getCities().map((item) => item.toLowerCase());
+        this.model.getCities()
+            .subscribe(response => self.cities = response.map(item => item.toLowerCase()));
 
         let form = document.getElementById('enterCityForm');
-    
-        form.addEventListener('submit', function () {
-            if(self.cities.includes(form.cityName.value.toLowerCase())) {
-                console.log('Ok');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            let inputValue = form.cityName.value.toLowerCase();
+
+            if (self.cities.includes(inputValue)) {
+                self.model.removeCity(inputValue);
+                form.cityName.value = '';
+                console.log('ГОРОД УДАЛЁН');
             } else {
-                console.log('City not found..');
+                console.log('ГОРОД НЕ НАЙДЕН');
             }
         });
     }
-
 }
