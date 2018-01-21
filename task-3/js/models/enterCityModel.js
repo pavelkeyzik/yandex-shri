@@ -83,7 +83,7 @@ export class EnterCityModel {
             'Якутск',
             'Ярославль',
             'Ясный'
-        ]
+        ];
     }
 
 }

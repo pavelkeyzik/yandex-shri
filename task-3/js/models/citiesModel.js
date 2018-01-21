@@ -85,7 +85,7 @@ export class CitiesModel {
             'Якутск',
             'Ярославль',
             'Ясный'
-        ]
+        ];
     }
 
 }
