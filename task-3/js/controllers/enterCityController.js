@@ -22,40 +22,76 @@ export class EnterCityController {
 
     addEvents() {
         let self = this;
+        let first = true;
         let form = document.getElementById('enterCityForm');
 
         form.addEventListener('submit', function (event) {
             event.preventDefault();
-
-            let inputValue = form.cityName.value.toLowerCase();
-
-            if (self.cities.includes(inputValue)) {
-                if(self.model.removeCity(inputValue)) {
-                    form.cityName.value = '';
-                    self.robotMove();
-                }
-            } else {
-                alert('City not found');
-            }
+            self.userMove(form, first);
+            first = false;
         });
     }
 
-    robotMove() {
+    userMove(form, first) {
         let self = this;
+        let inputValue = form.cityName.value.toLowerCase();
 
-        let symbol = this.getLastSymbol(this.lastCity);
+        console.log('SUK');
 
-        let foundedCity = self.cities.find((city) => {
+        if (self.cities.includes(inputValue)) {
+            if(first) {
+                console.log('ASADSd');
+                self.model.removeCity(inputValue);
+                form.cityName.value = '';
+                self.robotMove();
+            } else {
+                if(inputValue[0].toLowerCase() === self.getLastSymbol(self.lastCity)) {
+                    self.model.removeCity(inputValue);
+                    form.cityName.value = '';
+                    self.robotMove();
+
+                    if(!self.checkCanFindCity()) {
+                        alert('USER LOOSER');                        
+                    }
+                } else {
+                    alert('First letter of city not valid');
+                }
+            }
+
+        } else {
+            alert('City not found');
+        }
+    }
+
+    checkCanFindCity() {
+        let self = this;
+        let symbol = self.getLastSymbol();
+        
+        let city = self.cities.find((city) => {
             if(city.startsWith(symbol)) {
                 return city;
             }
         });
 
-        if(!foundedCity) alert('ROBOT LOOSER');
-        else self.model.removeCity(foundedCity);
+        if(city) {
+            return city;
+        }
+
+        return false;
     }
 
-    getLastSymbol(string) {
+    robotMove() {
+        let self = this;
+        let city = self.checkCanFindCity();
+
+        if(city) {
+            self.model.removeCity(city);
+        } else {
+            alert('ROBOT LOOSER');
+        }
+    }
+
+    getLastSymbol() {
         let symbol = '';
 
         for(let i = this.lastCity.length - 1; i >= 0; i--) {
