@@ -5,21 +5,70 @@ body {
   margin: 0;
   padding: 0;
 }
+header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background: #fff;
+  box-shadow: 0 0 4px #ccc;
+}
 .cities li {
   color: #444;
 }
 .enter-city {
-  position: sticky;
-  top: 0;
-  background: #fff;
-  box-shadow: 0 0 3px #ccc;
-  display: flex;
-  height: 45px;
-  align-items: center;
   padding: 0 10px;
-}
-.enter-city__form {
   display: flex;
+}
+.enter-city__input {
+  border: none;
+  border: 2px solid #ddd;
+  border-radius: 3px;
+  padding: 4px 10px;
+  transition: .2s;
+  font-weight: bold;
+}
+.enter-city__input:focus {
+  outline: none;
+  color: #001932;
+  background: #f6faff;
+  border: 2px solid #1e90ff;
+}
+.enter-city__button {
+  background: #1e90ff;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  height: 100%;
+  width: 45px;
+  transition: .2s;
+  border: 2px solid #1e90ff;
+  cursor: pointer;
+}
+.enter-city__button:focus,
+.enter-city__button:hover {
+  border: 2px solid #005db7;
+}
+.enter-city__hint {
+  font-size: 12px;
+  font-weight: bold;
+  color: #999;
+}
+.game-status {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 100%;
+  background: #fafafa;
+}
+.game-status__city {
+  background: #32cd32;
+  color: #fff;
+  padding: 3px 5px;
+  border-radius: 3px;
+  margin: 0 5px;
 }
 
 /*# sourceMappingURL=styles.css.map*/
