@@ -14271,10 +14271,15 @@ class CitiesModel {
     constructor() {
         this.cities = cities;
         this.citiesBehavior = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx___default.a.BehaviorSubject(cities);
+        this.usersCities = [];
     }
 
     getCities() {
         return this.citiesBehavior;
+    }
+
+    getUsersCities() {
+        return this.usersCities;
     }
     
     removeCity(name) {
@@ -14282,6 +14287,7 @@ class CitiesModel {
 
         this.cities.map((item, index) => {
             if(item.toLowerCase() == name) {
+                this.usersCities.push(item);
                 this.cities.splice(index, 1);
                 response = true;
                 this.citiesBehavior.next(this.cities);
