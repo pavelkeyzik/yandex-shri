@@ -13,6 +13,3 @@ let cities = new CitiesController(citiesView, citiesModel);
 
 let enterCityView = new EnterCityView();
 let enterCity = new EnterCityController(enterCityView, citiesModel);
-
-cities.run();
-enterCity.run();
