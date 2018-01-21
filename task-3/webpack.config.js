@@ -34,7 +34,6 @@ module.exports = {
         new ExtractTextPlugin('styles.css', { allChunks: true }),
         new BrowserSyncPlugin({
             host: 'localhost',
-            port: '4200',
             server: { baseDir: ['dist'] }
         })
     ],
