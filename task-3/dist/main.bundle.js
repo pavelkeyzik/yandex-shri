@@ -14230,6 +14230,7 @@ let enterCity = new __WEBPACK_IMPORTED_MODULE_4__controllers_enterCityController
 let gameStatusView = new __WEBPACK_IMPORTED_MODULE_6__views_gameStatus_gameStatusView__["a" /* GameStatusView */]();
 let gameStatus = new __WEBPACK_IMPORTED_MODULE_7__controllers_gameStatusController__["a" /* GameStatusController */](gameStatusView, citiesModel);
 
+
 /***/ }),
 /* 160 */
 /***/ (function(module, exports) {
@@ -14279,7 +14280,7 @@ class CitiesModel {
         this.cities = cities;
         this.citiesBehavior = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx___default.a.BehaviorSubject(cities);
         this.usersCities = [];
-        this.lastCity = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx___default.a.BehaviorSubject('-');
+        this.lastCity = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx___default.a.BehaviorSubject('Начинай');
     }
 
     getCities() {
@@ -25694,6 +25695,8 @@ class EnterCityController {
         this.view = view;
         this.model = model;
         this.ignoreSymbols = ['ё', 'щ', 'ъ', 'ы', 'ь'];
+        this.whoMove = true; // Чей ход true - пользователь, false - компьютер
+        this.first = true;
 
         this.model.getCities()
             .subscribe((response) => this.cities = response.map((item) => item.toLowerCase()));
@@ -25716,18 +25719,75 @@ class EnterCityController {
 
         form.addEventListener('submit', function (event) {
             event.preventDefault();
+            self.userMove(form);
+        });
+    }
 
-            let inputValue = form.cityName.value.toLowerCase();
+    userMove(form) {
+        let self = this;
+        let inputValue = form.cityName.value.toLowerCase();
 
-            if (self.cities.includes(inputValue)) {
-                if(self.model.removeCity(inputValue)) {
-                    form.cityName.value = '';
-                    self.robotMove();
-                }
+        if (self.cities.includes(inputValue) && self.first) {
+            self.model.removeCity(inputValue);
+            form.cityName.value = '';
+            self.first = false;
+            self.robotMove();
+        } else if (self.cities.includes(inputValue) && !self.first) {
+            if (inputValue[0].toLowerCase() === self.getLastSymbol(self.lastCity)) {
+                self.model.removeCity(inputValue);
+                form.cityName.value = '';
+                self.first = false;
+                self.robotMove();
             } else {
-                alert('City not found');
+                alert('First letter of city not valid');
+            }
+        } else {
+            alert('Нет такого города');
+        }
+    }
+
+    checkCanFindCity() {
+        let self = this;
+        let symbol = self.getLastSymbol();
+
+        let city = self.cities.find((city) => {
+            if (city.startsWith(symbol)) {
+                return city;
             }
         });
+
+        if (city) {
+            return city;
+        } else if (self.whoMove == true) {
+            alert('USER LOOOSER');
+        } else if (self.whoMove == false) {
+            alert('ROBOT LOOOSER');
+        }
+    }
+
+    robotMove() {
+        let self = this;
+        self.whoMove = false;
+        let city = self.checkCanFindCity();
+
+        if (city) {
+            self.model.removeCity(city);
+            self.whoMove = true;
+            self.checkCanFindCity();
+        }
+    }
+
+    getLastSymbol() {
+        let symbol = '';
+
+        for (let i = this.lastCity.length - 1; i >= 0; i--) {
+            if (!this.ignoreSymbols.includes(this.lastCity[i].toLowerCase())) {
+                symbol = this.lastCity[i].toLowerCase();
+                break;
+            }
+        }
+
+        return symbol;
     }
 
     robotMove() {
