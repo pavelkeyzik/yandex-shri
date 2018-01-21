@@ -14223,10 +14223,6 @@ let cities = new __WEBPACK_IMPORTED_MODULE_1__controllers_citiesController__["a"
 let enterCityView = new __WEBPACK_IMPORTED_MODULE_5__views_enterCity_enterCityView__["a" /* EnterCityView */]();
 let enterCity = new __WEBPACK_IMPORTED_MODULE_4__controllers_enterCityController__["a" /* EnterCityController */](enterCityView, citiesModel);
 
-cities.run();
-enterCity.run();
-
-
 /***/ }),
 /* 160 */
 /***/ (function(module, exports) {
@@ -14243,6 +14239,7 @@ class CitiesController {
     constructor(view, model) {
         this.view = view;
         this.model = model;
+        this.run();
     }
 
     run() {
@@ -25677,6 +25674,8 @@ class EnterCityController {
     constructor(view, model) {
         this.view = view;
         this.model = model;
+
+        this.run();
     }
 
     run() {
@@ -25689,7 +25688,7 @@ class EnterCityController {
     addEvents() {
         let self = this;
         this.model.getCities()
-            .subscribe(response => self.cities = response.map(item => item.toLowerCase()));
+            .subscribe((response) => self.cities = response.map((item) => item.toLowerCase()));
 
         let form = document.getElementById('enterCityForm');
 

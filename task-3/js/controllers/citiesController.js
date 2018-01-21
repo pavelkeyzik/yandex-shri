@@ -3,6 +3,7 @@ export class CitiesController {
     constructor(view, model) {
         this.view = view;
         this.model = model;
+        this.run();
     }
 
     run() {

@@ -3,6 +3,8 @@ export class EnterCityController {
     constructor(view, model) {
         this.view = view;
         this.model = model;
+
+        this.run();
     }
 
     run() {
@@ -15,7 +17,7 @@ export class EnterCityController {
     addEvents() {
         let self = this;
         this.model.getCities()
-            .subscribe(response => self.cities = response.map(item => item.toLowerCase()));
+            .subscribe((response) => self.cities = response.map((item) => item.toLowerCase()));
 
         let form = document.getElementById('enterCityForm');
 
