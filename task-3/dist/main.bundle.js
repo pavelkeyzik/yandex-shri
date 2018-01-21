@@ -14208,7 +14208,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__controllers_enterCityController__ = __webpack_require__(462);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_enterCity_enterCityView__ = __webpack_require__(463);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_gameStatus_gameStatusView__ = __webpack_require__(465);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__controllers_gameStatusController__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__controllers_gameStatusController__ = __webpack_require__(467);
 
 
 
@@ -14229,6 +14229,7 @@ let enterCity = new __WEBPACK_IMPORTED_MODULE_4__controllers_enterCityController
 
 let gameStatusView = new __WEBPACK_IMPORTED_MODULE_6__views_gameStatus_gameStatusView__["a" /* GameStatusView */]();
 let gameStatus = new __WEBPACK_IMPORTED_MODULE_7__controllers_gameStatusController__["a" /* GameStatusController */](gameStatusView, citiesModel);
+
 
 /***/ }),
 /* 160 */
@@ -25693,7 +25694,13 @@ class EnterCityController {
     constructor(view, model) {
         this.view = view;
         this.model = model;
+        this.ignoreSymbols = ['ё', 'щ', 'ъ', 'ы', 'ь'];
 
+        this.model.getCities()
+            .subscribe((response) => this.cities = response.map((item) => item.toLowerCase()));
+
+        this.model.getLastCity()
+            .subscribe((response) => this.lastCity = response);
         this.run();
     }
 
@@ -25706,9 +25713,6 @@ class EnterCityController {
 
     addEvents() {
         let self = this;
-        this.model.getCities()
-            .subscribe((response) => self.cities = response.map((item) => item.toLowerCase()));
-
         let form = document.getElementById('enterCityForm');
 
         form.addEventListener('submit', function (event) {
@@ -25717,13 +25721,42 @@ class EnterCityController {
             let inputValue = form.cityName.value.toLowerCase();
 
             if (self.cities.includes(inputValue)) {
-                self.model.removeCity(inputValue);
-                form.cityName.value = '';
-                console.log('ГОРОД УДАЛЁН');
+                if(self.model.removeCity(inputValue)) {
+                    form.cityName.value = '';
+                    self.robotMove();
+                }
             } else {
-                console.log('ГОРОД НЕ НАЙДЕН');
+                alert('City not found');
             }
         });
+    }
+
+    robotMove() {
+        let self = this;
+
+        let symbol = this.getLastSymbol(this.lastCity);
+
+        let foundedCity = self.cities.find((city) => {
+            if(city.startsWith(symbol)) {
+                return city;
+            }
+        });
+
+        if(!foundedCity) alert('ROBOT LOOSER');
+        else self.model.removeCity(foundedCity);
+    }
+
+    getLastSymbol(string) {
+        let symbol = '';
+
+        for(let i = this.lastCity.length - 1; i >= 0; i--) {
+            if(!this.ignoreSymbols.includes(this.lastCity[i].toLowerCase())) {
+                symbol = this.lastCity[i].toLowerCase();
+                break;
+            }
+        }
+
+        return symbol;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = EnterCityController;
@@ -25764,7 +25797,7 @@ class EnterCityView {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gameStatusView_less__ = __webpack_require__(473);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gameStatusView_less__ = __webpack_require__(466);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gameStatusView_less___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__gameStatusView_less__);
 
 
@@ -25780,6 +25813,12 @@ class GameStatusView {
 
 /***/ }),
 /* 466 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 467 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25803,18 +25842,6 @@ class GameStatusController {
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = GameStatusController;
 
-
-/***/ }),
-/* 467 */,
-/* 468 */,
-/* 469 */,
-/* 470 */,
-/* 471 */,
-/* 472 */,
-/* 473 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
