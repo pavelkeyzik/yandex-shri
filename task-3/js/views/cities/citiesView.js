@@ -1,3 +1,5 @@
+import './citiesView.less';
+
 export class CitiesView {
 
     constructor() {}

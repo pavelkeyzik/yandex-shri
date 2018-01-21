@@ -1,10 +1,12 @@
+import '../main.less';
+
 import { CitiesController } from './controllers/citiesController';
 import { CitiesModel } from './models/citiesModel';
-import { CitiesView } from './views/citiesView';
+import { CitiesView } from './views/cities/citiesView';
 
 import { EnterCityController } from './controllers/enterCityController';
 import { EnterCityModel } from './models/enterCityModel';
-import { EnterCityView } from './views/enterCityView';
+import { EnterCityView } from './views/enterCity/enterCityView';
 
 let citiesView = new CitiesView();
 let citiesModel = new CitiesModel();
