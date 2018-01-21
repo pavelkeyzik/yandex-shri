@@ -14207,6 +14207,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_cities_citiesView__ = __webpack_require__(460);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__controllers_enterCityController__ = __webpack_require__(462);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_enterCity_enterCityView__ = __webpack_require__(463);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_gameStatus_gameStatusView__ = __webpack_require__(465);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__controllers_gameStatusController__ = __webpack_require__(466);
+
+
 
 
 
@@ -14222,6 +14226,9 @@ let cities = new __WEBPACK_IMPORTED_MODULE_1__controllers_citiesController__["a"
 
 let enterCityView = new __WEBPACK_IMPORTED_MODULE_5__views_enterCity_enterCityView__["a" /* EnterCityView */]();
 let enterCity = new __WEBPACK_IMPORTED_MODULE_4__controllers_enterCityController__["a" /* EnterCityController */](enterCityView, citiesModel);
+
+let gameStatusView = new __WEBPACK_IMPORTED_MODULE_6__views_gameStatus_gameStatusView__["a" /* GameStatusView */]();
+let gameStatus = new __WEBPACK_IMPORTED_MODULE_7__controllers_gameStatusController__["a" /* GameStatusController */](gameStatusView, citiesModel);
 
 /***/ }),
 /* 160 */
@@ -14272,6 +14279,7 @@ class CitiesModel {
         this.cities = cities;
         this.citiesBehavior = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx___default.a.BehaviorSubject(cities);
         this.usersCities = [];
+        this.lastCity = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx___default.a.BehaviorSubject('-');
     }
 
     getCities() {
@@ -14281,12 +14289,17 @@ class CitiesModel {
     getUsersCities() {
         return this.usersCities;
     }
+
+    getLastCity() {
+        return this.lastCity;
+    }
     
     removeCity(name) {
         let response = false;
 
         this.cities.map((item, index) => {
             if(item.toLowerCase() == name) {
+                this.lastCity.next(item);
                 this.usersCities.push(item);
                 this.cities.splice(index, 1);
                 response = true;
@@ -25730,8 +25743,9 @@ class EnterCityView {
     render() {
         return `
             <form id="enterCityForm" class="enter-city__form">
-                <input name="cityName" autocomplete="off" placeholder="Enter city" id="enterCityInput">
-                <button name="button">OK</button>
+                <input class="enter-city__input" name="cityName" autocomplete="off" placeholder="Enter city" id="enterCityInput">
+                <button class="enter-city__button" name="button">OK</button>
+                <span class="enter-city__hint">or Enter</span>
             </form>`;
     }
 
@@ -25741,6 +25755,63 @@ class EnterCityView {
 
 /***/ }),
 /* 464 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 465 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gameStatusView_less__ = __webpack_require__(473);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gameStatusView_less___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__gameStatusView_less__);
+
+
+class GameStatusView {
+
+    render(container, lastCity) {
+        container.innerHTML = `Last city:  <span class="game-status__city">${ lastCity }</span>`;
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = GameStatusView;
+
+
+/***/ }),
+/* 466 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class GameStatusController {
+
+    constructor(view, model) {
+        this.view = view;
+        this.model = model;
+        
+        this.run();
+    }
+
+    run() {
+        let viewContainer = document.getElementById('gameStatus');
+        
+        this.model.getLastCity().subscribe((response) => {
+            this.view.render(viewContainer, response);
+        });
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = GameStatusController;
+
+
+/***/ }),
+/* 467 */,
+/* 468 */,
+/* 469 */,
+/* 470 */,
+/* 471 */,
+/* 472 */,
+/* 473 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
