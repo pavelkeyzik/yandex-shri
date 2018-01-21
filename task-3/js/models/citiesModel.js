@@ -8,7 +8,7 @@ export class CitiesModel {
         this.cities = cities;
         this.citiesBehavior = new Rx.BehaviorSubject(cities);
         this.usersCities = [];
-        this.lastCity = new Rx.BehaviorSubject('-');
+        this.lastCity = new Rx.BehaviorSubject('Начинай');
     }
 
     getCities() {
