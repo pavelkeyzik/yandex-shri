@@ -98,4 +98,32 @@ export class EnterCityController {
 
         return symbol;
     }
+
+    robotMove() {
+        let self = this;
+
+        let symbol = this.getLastSymbol(this.lastCity);
+
+        let foundedCity = self.cities.find((city) => {
+            if(city.startsWith(symbol)) {
+                return city;
+            }
+        });
+
+        if(!foundedCity) alert('ROBOT LOOSER');
+        else self.model.removeCity(foundedCity);
+    }
+
+    getLastSymbol(string) {
+        let symbol = '';
+
+        for(let i = this.lastCity.length - 1; i >= 0; i--) {
+            if(!this.ignoreSymbols.includes(this.lastCity[i].toLowerCase())) {
+                symbol = this.lastCity[i].toLowerCase();
+                break;
+            }
+        }
+
+        return symbol;
+    }
 }
