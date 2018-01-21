@@ -14230,7 +14230,6 @@ let enterCity = new __WEBPACK_IMPORTED_MODULE_4__controllers_enterCityController
 let gameStatusView = new __WEBPACK_IMPORTED_MODULE_6__views_gameStatus_gameStatusView__["a" /* GameStatusView */]();
 let gameStatus = new __WEBPACK_IMPORTED_MODULE_7__controllers_gameStatusController__["a" /* GameStatusController */](gameStatusView, citiesModel);
 
-
 /***/ }),
 /* 160 */
 /***/ (function(module, exports) {
