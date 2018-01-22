@@ -25791,8 +25791,12 @@ class EnterCityController {
             return city;
         } else if (self.whoMove == true) {
             alert('USER LOOOSER');
+            console.log(self.model.getUsersCities());
+            console.log(self.model.getRobotsCities());
         } else if (self.whoMove == false) {
             alert('ROBOT LOOOSER');
+            console.log(self.model.getUsersCities());
+            console.log(self.model.getRobotsCities());
         }
 
         self.model.gameResult(self.whoMove);
