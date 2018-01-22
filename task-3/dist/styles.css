@@ -70,5 +70,22 @@ header {
   border-radius: 3px;
   margin: 0 5px;
 }
+.game-result {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  background: #fff;
+  box-shadow: 0 5px 20px #dedede;
+  padding: 10px 20px;
+  top: 60px;
+  left: 60px;
+  z-index: 999;
+}
+.game-result__data {
+  display: flex;
+}
+.game-result__data div:not(:last-child) {
+  margin-right: 20px;
+}
 
 /*# sourceMappingURL=styles.css.map*/

@@ -72,6 +72,8 @@ export class EnterCityController {
         } else if (self.whoMove == false) {
             alert('ROBOT LOOOSER');
         }
+
+        self.model.gameResult(self.whoMove);
     }
 
     robotMove() {

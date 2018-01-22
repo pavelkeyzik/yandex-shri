@@ -14209,6 +14209,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_enterCity_enterCityView__ = __webpack_require__(463);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_gameStatus_gameStatusView__ = __webpack_require__(465);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__controllers_gameStatusController__ = __webpack_require__(467);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_gameResult_gameResultView__ = __webpack_require__(468);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__controllers_gameResultController__ = __webpack_require__(469);
+
+
 
 
 
@@ -14230,6 +14234,8 @@ let enterCity = new __WEBPACK_IMPORTED_MODULE_4__controllers_enterCityController
 let gameStatusView = new __WEBPACK_IMPORTED_MODULE_6__views_gameStatus_gameStatusView__["a" /* GameStatusView */]();
 let gameStatus = new __WEBPACK_IMPORTED_MODULE_7__controllers_gameStatusController__["a" /* GameStatusController */](gameStatusView, citiesModel);
 
+let gameResultView = new __WEBPACK_IMPORTED_MODULE_8__views_gameResult_gameResultView__["a" /* GameResultView */]();
+let gameResult = new __WEBPACK_IMPORTED_MODULE_9__controllers_gameResultController__["a" /* GameResultController */](gameResultView, citiesModel);
 
 /***/ }),
 /* 160 */
@@ -14279,6 +14285,7 @@ class CitiesModel {
     constructor() {
         this.cities = cities;
         this.citiesBehavior = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx___default.a.BehaviorSubject(cities);
+        this.looser = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx___default.a.BehaviorSubject();
         this.usersCities = [];
         this.robotsCities = [];
         this.lastCity = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx___default.a.BehaviorSubject('Начинай');
@@ -14299,7 +14306,19 @@ class CitiesModel {
     getLastCity() {
         return this.lastCity;
     }
+
+    gameResult(looser) {
+        this.looser.next({
+            looser: looser,
+            usersCities: this.usersCities,
+            robotsCities: this.robotsCities
+        });
+    }
     
+    getLooser() {
+        return this.looser;
+    }
+
     removeCity(name, who) {
         let response = false;
 
@@ -25779,6 +25798,8 @@ class EnterCityController {
             console.log(self.model.getUsersCities());
             console.log(self.model.getRobotsCities());
         }
+
+        self.model.gameResult(self.whoMove);
     }
 
     robotMove() {
@@ -25902,6 +25923,94 @@ class GameStatusController {
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = GameStatusController;
 
+
+/***/ }),
+/* 468 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gameResultView_less__ = __webpack_require__(477);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gameResultView_less___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__gameResultView_less__);
+
+
+class GameResultView {
+
+    render(data) {
+        let body = document.body;
+        let dialog = document.createElement('div');
+        let looser = '';
+
+        if(data.looser) {
+            looser = 'YOU';
+        } else {
+            looser = 'ROBOT';
+        }
+
+        let userWriteString = '';
+        data.usersCities.forEach((element) => {
+            userWriteString += `<li>${ element }</li>`;
+        });
+
+        let robotWriteString = '';
+        data.robotsCities.forEach((element) => {
+            robotWriteString += `<li>${ element }</li>`;
+        });
+
+        dialog.innerHTML = `
+            <div class="game-result">
+                <div class="game-result__title">${ looser } LOOSER</div>
+                <div class="game-result__data">
+                    <div>
+                        <h2>YOU WRITE</h2>
+                        ${ userWriteString }
+                    </div>
+                    <div>
+                        <h2>ROBOT WRITE</h2>
+                        ${ robotWriteString }
+                    </div>
+                </div>
+            </div>
+        `;
+
+        body.appendChild(dialog);
+        console.log('RENDER', data);
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = GameResultView;
+
+
+/***/ }),
+/* 469 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class GameResultController {
+
+    constructor(view, model) {
+        this.view = view;
+        this.model = model;
+        this.model.getLooser().subscribe((res) => {
+            if(res !== undefined) this.view.render(res);
+        });
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = GameResultController;
+
+
+/***/ }),
+/* 470 */,
+/* 471 */,
+/* 472 */,
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
