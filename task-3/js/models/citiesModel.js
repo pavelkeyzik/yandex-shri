@@ -7,6 +7,7 @@ export class CitiesModel {
     constructor() {
         this.cities = cities;
         this.citiesBehavior = new Rx.BehaviorSubject(cities);
+        this.looser = new Rx.BehaviorSubject();
         this.usersCities = [];
         this.robotsCities = [];
         this.lastCity = new Rx.BehaviorSubject('Начинай');
@@ -27,7 +28,19 @@ export class CitiesModel {
     getLastCity() {
         return this.lastCity;
     }
+
+    gameResult(looser) {
+        this.looser.next({
+            looser: looser,
+            usersCities: this.usersCities,
+            robotsCities: this.robotsCities
+        });
+    }
     
+    getLooser() {
+        return this.looser;
+    }
+
     removeCity(name, who) {
         let response = false;
 
