@@ -14280,6 +14280,7 @@ class CitiesModel {
         this.cities = cities;
         this.citiesBehavior = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx___default.a.BehaviorSubject(cities);
         this.usersCities = [];
+        this.robotsCities = [];
         this.lastCity = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx___default.a.BehaviorSubject('Начинай');
     }
 
@@ -14291,17 +14292,28 @@ class CitiesModel {
         return this.usersCities;
     }
 
+    getRobotsCities() {
+        return this.robotsCities;
+    }
+
     getLastCity() {
         return this.lastCity;
     }
     
-    removeCity(name) {
+    removeCity(name, who) {
         let response = false;
 
         this.cities.map((item, index) => {
             if(item.toLowerCase() == name) {
                 this.lastCity.next(item);
-                this.usersCities.push(item);
+
+                // If who == true - it's user else it's robot
+                if(who) {
+                    this.usersCities.push(item);
+                } else {
+                    this.robotsCities.push(item);
+                }
+
                 this.cities.splice(index, 1);
                 response = true;
                 this.citiesBehavior.next(this.cities);
@@ -25728,13 +25740,13 @@ class EnterCityController {
         let inputValue = form.cityName.value.toLowerCase();
 
         if (self.cities.includes(inputValue) && self.first) {
-            self.model.removeCity(inputValue);
+            self.model.removeCity(inputValue, self.whoMove);
             form.cityName.value = '';
             self.first = false;
             self.robotMove();
         } else if (self.cities.includes(inputValue) && !self.first) {
             if (inputValue[0].toLowerCase() === self.getLastSymbol(self.lastCity)) {
-                self.model.removeCity(inputValue);
+                self.model.removeCity(inputValue, self.whoMove);
                 form.cityName.value = '';
                 self.first = false;
                 self.robotMove();
@@ -25760,8 +25772,12 @@ class EnterCityController {
             return city;
         } else if (self.whoMove == true) {
             alert('USER LOOOSER');
+            console.log(self.model.getUsersCities());
+            console.log(self.model.getRobotsCities());
         } else if (self.whoMove == false) {
             alert('ROBOT LOOOSER');
+            console.log(self.model.getUsersCities());
+            console.log(self.model.getRobotsCities());
         }
     }
 
@@ -25771,7 +25787,7 @@ class EnterCityController {
         let city = self.checkCanFindCity();
 
         if (city) {
-            self.model.removeCity(city);
+            self.model.removeCity(city, self.whoMove);
             self.whoMove = true;
             self.checkCanFindCity();
         }
@@ -25788,21 +25804,6 @@ class EnterCityController {
         }
 
         return symbol;
-    }
-
-    robotMove() {
-        let self = this;
-
-        let symbol = this.getLastSymbol(this.lastCity);
-
-        let foundedCity = self.cities.find((city) => {
-            if(city.startsWith(symbol)) {
-                return city;
-            }
-        });
-
-        if(!foundedCity) alert('ROBOT LOOSER');
-        else self.model.removeCity(foundedCity);
     }
 
     getLastSymbol(string) {
