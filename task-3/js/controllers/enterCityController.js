@@ -37,13 +37,13 @@ export class EnterCityController {
         let inputValue = form.cityName.value.toLowerCase();
 
         if (self.cities.includes(inputValue) && self.first) {
-            self.model.removeCity(inputValue);
+            self.model.removeCity(inputValue, self.whoMove);
             form.cityName.value = '';
             self.first = false;
             self.robotMove();
         } else if (self.cities.includes(inputValue) && !self.first) {
             if (inputValue[0].toLowerCase() === self.getLastSymbol(self.lastCity)) {
-                self.model.removeCity(inputValue);
+                self.model.removeCity(inputValue, self.whoMove);
                 form.cityName.value = '';
                 self.first = false;
                 self.robotMove();
@@ -80,7 +80,7 @@ export class EnterCityController {
         let city = self.checkCanFindCity();
 
         if (city) {
-            self.model.removeCity(city);
+            self.model.removeCity(city, self.whoMove);
             self.whoMove = true;
             self.checkCanFindCity();
         }
@@ -97,21 +97,6 @@ export class EnterCityController {
         }
 
         return symbol;
-    }
-
-    robotMove() {
-        let self = this;
-
-        let symbol = this.getLastSymbol(this.lastCity);
-
-        let foundedCity = self.cities.find((city) => {
-            if(city.startsWith(symbol)) {
-                return city;
-            }
-        });
-
-        if(!foundedCity) alert('ROBOT LOOSER');
-        else self.model.removeCity(foundedCity);
     }
 
     getLastSymbol(string) {
